@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:856417139998:android:0c555d2057c1bb0ae71d0f",
+        "mobilesdk_app_id": "1:856417139998:android:18c2b34a3b3aa045e71d0f",
         "android_client_info": {
-          "package_name": "com.example.test_1"
+          "package_name": "com.task.tracker"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "856417139998-cfv8e8n1316jp7642a59fal8s17s3ml8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "856417139998-22fv28s2njk3j73bph6r34t3cj9thq0r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.test1"
+              }
             }
           ]
         }
