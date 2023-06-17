@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:test_1/screens/main_screen.dart';
+import 'package:test_1/widgets/next_button.dart';
 
 import 'firebase_options.dart';
 

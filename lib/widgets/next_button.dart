@@ -3,7 +3,7 @@ import 'package:test_1/constants/colors.dart';
 
 class NextButton extends StatelessWidget {
   final String title;
-  final Function onTapHandler;
+  final onTapHandler;
   final double sWidth;
   final double sHeight;
   const NextButton({
@@ -17,9 +17,7 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        onTapHandler;
-      },
+      onPressed: onTapHandler,
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonColor,
         fixedSize: Size(sWidth, sHeight * .1),
