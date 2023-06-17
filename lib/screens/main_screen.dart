@@ -17,11 +17,11 @@ class _MainScreenState extends State<MainScreen> {
   String bottomText = "";
 
   String titleButton = "Get Started";
-  TextStyle bottomTextStyle = new TextStyle(color: Colors.black, fontSize: 16);
+  TextStyle bottomTextStyle = new TextStyle(color: Colors.black, fontSize: 18);
 
   @override
   void initState() {
-    print(index);
+    //print(index);
     super.initState();
   }
 
@@ -33,9 +33,10 @@ class _MainScreenState extends State<MainScreen> {
     contentWidgets = [
       ContainerStart(sWidth: sWidth, sHeight: sHeight),
       ContainerForm(sWidth: sWidth, sHeight: sHeight),
-      ContainerAuth(),
+      ContainerAuth(sWidth: sWidth, sHeight: sHeight),
     ];
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         extendBodyBehindAppBar: true,
         backgroundColor: background,
         body: Column(
@@ -43,8 +44,8 @@ class _MainScreenState extends State<MainScreen> {
             contentWidgets[index],
             Spacer(flex: 25),
             NextButton(
-              sWidth: sWidth*0.8,
-              sHeight: sHeight*0.8,
+              sWidth: sWidth * 0.8,
+              sHeight: sHeight * 0.8,
               title: titleButton,
               onTapHandler: () {
                 setState(() {
@@ -55,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
                   } else if (index == 1) {
                     index = 2;
                     titleButton = "LOG IN";
-                    bottomText = "";
+                    bottomText = "Don’t have an account? sign up";
                   } else if (index == 2) {
                     index = 0;
                     titleButton = "Get Started";
@@ -64,9 +65,16 @@ class _MainScreenState extends State<MainScreen> {
                 });
               },
             ),
-            Spacer(flex: 10,),
-            Text(bottomText, style: bottomTextStyle,),
-            Spacer(flex: 10,)
+            const Spacer(
+              flex: 10,
+            ),
+            Text(
+              bottomText,
+              style: bottomTextStyle,
+            ),
+            const Spacer(
+              flex: 10,
+            )
           ],
         ));
   }
@@ -75,13 +83,16 @@ class _MainScreenState extends State<MainScreen> {
 class PhoneImage extends StatelessWidget {
   const PhoneImage({
     super.key,
+    required this.path,
   });
+
+  final String path;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.center, children: const [
+    return Stack(alignment: Alignment.center, children: [
       Image(
-        image: AssetImage("assets/images/phone.png"),
+        image: AssetImage(path),
         fit: BoxFit.contain,
       )
     ]);
@@ -118,7 +129,9 @@ class ContainerStart extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 12,
-                        child: PhoneImage(),
+                        child: PhoneImage(
+                          path: "assets/images/phone.png",
+                        ),
                       ),
                       Spacer(
                         flex: 1,
@@ -166,6 +179,7 @@ class ContainerForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: circles,
       width: sWidth,
       height: sHeight * 0.8,
       child: FractionallySizedBox(
@@ -224,10 +238,71 @@ class ContainerForm extends StatelessWidget {
 }
 
 class ContainerAuth extends StatelessWidget {
-  const ContainerAuth({super.key});
+  const ContainerAuth({
+    super.key,
+    required this.sWidth,
+    required this.sHeight,
+  });
+
+  final double sWidth;
+  final double sHeight;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      decoration: circles,
+      width: sWidth,
+      height: sHeight * 0.8,
+      child: FractionallySizedBox(
+        widthFactor: .8,
+        child: Expanded(
+          flex: 1,
+          child: Column(
+            children: [
+              const Spacer(
+                  flex: 100,
+                ),
+              const Text(
+                "Welcome Back!",
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+              const Spacer(
+                  flex: 3,
+                ),
+              const Expanded(flex: 100, child: PhoneImage(path: "assets/images/listViewImage.png")),
+              const Spacer(
+                  flex: 10,
+                ),
+              Expanded(
+                flex: 100,
+                child: Form(
+                    child: Column(
+                  children: const [
+                    TextFormFieldAuth(insertHintText: "Enter your email"),
+                    Spacer(
+                    flex: 1,
+                  ),
+                    TextFormFieldAuth(insertHintText: "Enter your password"),
+                    Spacer(
+                    flex: 90,
+                  ),
+                    Text("Forget Password?",
+                        style: TextStyle(
+                            color: activeTextColor,
+                            fontFamily: 'Roboto',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w100))
+                  ],
+                )),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
