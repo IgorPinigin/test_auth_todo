@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:test_1/screens/start_screen.dart';
 import 'package:test_1/widgets/next_button.dart';
 import '../constants/colors.dart';
-import 'auth_screen.dart';
 import 'login_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   String bottomText = "";
 
   String titleButton = "Get Started";
-  TextStyle bottomTextStyle = new TextStyle(color: Colors.black, fontSize: 18);
+  TextStyle bottomTextStyle = const TextStyle(color: Colors.black, fontSize: 18);
 
   @override
   void initState() {
@@ -34,7 +33,8 @@ class _MainScreenState extends State<MainScreen> {
     contentWidgets = [
       ContainerStart(sWidth: sWidth, sHeight: sHeight),
       ContainerForm(sWidth: sWidth, sHeight: sHeight),
-      ContainerAuth(sWidth: sWidth, sHeight: sHeight),
+      //ContainerAuth(sWidth: sWidth, sHeight: sHeight),
+      //TasksScreen(),
     ];
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
         body: Column(
           children: [
             contentWidgets[index],
-            Spacer(flex: 25),
+            const Spacer(flex: 25),
             NextButton(
               sWidth: sWidth * 0.8,
               sHeight: sHeight * 0.8,
@@ -56,13 +56,19 @@ class _MainScreenState extends State<MainScreen> {
                     bottomText = "Already have an account? sign in";
                   } else if (index == 1) {
                     index = 2;
-                    titleButton = "LOG IN";
-                    bottomText = "Don’t have an account? sign up";
-                  } else if (index == 2) {
-                    index = 0;
-                    titleButton = "Get Started";
+                  //titleButton = "LOG IN";
+                    titleButton = "";
+                  //bottomText = "Don’t have an account? sign up";
                     bottomText = "";
-                  }
+                 }// else if (index == 2) {
+                  //   index = 0;
+                  //   titleButton = "Get Started";
+                  //   bottomText = "";
+                  //} else if (index == 3) {
+                  //   index = 0;
+                  //   //titleButton = "Get Started";
+                  //   //bottomText = "";
+                  // }
                 });
               },
             ),

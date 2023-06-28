@@ -27,7 +27,7 @@ class NextButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(fontSize: 18, fontFamily: 'Roboto'),
+        style: const TextStyle(fontSize: 18, fontFamily: 'Roboto'),
       ),
     );
   }
