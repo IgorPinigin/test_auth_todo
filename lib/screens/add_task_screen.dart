@@ -14,9 +14,9 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+  TextEditingController titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController titleController = TextEditingController();
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -29,9 +29,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           const SizedBox(
             height: 10,
           ),
-          TextField(
-            autofocus: true,
-            style: const TextStyle(color: Colors.white),
+          TextFormField(
+            // autofocus: true,
+            textInputAction: TextInputAction.done,
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
                 fillColor: background,
                 filled: true,
@@ -40,6 +41,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   borderSide: BorderSide.none,
                 )),
             controller: titleController,
+            // onChanged: (value) {
+            //   print(value);
+            // },
+            onSaved: (newValue) {
+              setState(() {
+                titleController.text = newValue!;
+              });
+            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

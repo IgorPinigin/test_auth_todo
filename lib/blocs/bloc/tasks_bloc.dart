@@ -1,7 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:test_1/models/tasks.dart'; 
+import 'package:test_1/models/tasks.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';
@@ -21,18 +21,18 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     final state = this.state;
     final task = event.task;
     final int index = state.allTasks.indexOf(task);
-    List<Task> allTasks = List.from(state.allTasks)..remove(event.task);
-    task.isDone == false
-      ? allTasks.insert(index, task.copyWith(isDone: true))
-      : allTasks.insert(index, task.copyWith(isDone: false));
-      emit(TasksState(allTasks: allTasks));
-
+    List<Task> allTasks = List.from(state.allTasks);
+    task.isDone = event.isDone;
+    // false
+    //   ? allTasks.insert(index, task.copyWith(isDone: true))
+    //   : allTasks.insert(index, task.copyWith(isDone: false));
+    emit(TasksState(allTasks: allTasks));
   }
 
   void _onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
     final int index = state.allTasks.indexOf(task);
-    emit(TasksState(allTasks: List.from(state.allTasks)..remove(event.task))); 
+    emit(TasksState(allTasks: List.from(state.allTasks)..remove(event.task)));
   }
 }
