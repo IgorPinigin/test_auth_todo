@@ -8,6 +8,10 @@ abstract class TasksEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class InitTask extends TasksEvent {
+  
+}
+
 class AddTask extends TasksEvent {
   final Task task;
   const AddTask({
@@ -20,15 +24,20 @@ class AddTask extends TasksEvent {
 class UpdateTask extends TasksEvent {
   final Task task;
   final bool isDone;
-  const UpdateTask({required this.task, required this.isDone});
+  const UpdateTask({
+    required this.task,
+    required this.isDone,
+  });
   @override
   List<Object> get props => [task];
 }
 
 class DeleteTask extends TasksEvent {
   final Task task;
+  final bool isDeleted;
   const DeleteTask({
     required this.task,
+    required this.isDeleted,
   });
   @override
   List<Object> get props => [task];

@@ -7,17 +7,21 @@ import 'package:test_1/screens/tasks_screen.dart';
 
 import 'blocs/bloc_export.dart';
 import 'firebase_options.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+
+  final storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
   );
-  BlocOverrides.runZoned(
-    () {
-      runApp(const MyApp());
-    },
-  );
+  {
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -31,11 +35,8 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
     return BlocProvider(
-      create: (context) => TasksBloc()
-        ..add(AddTask(
-          task: Task(title: 'Task 1'),
-          
-        )),
+      create: (context) => TasksBloc()..add(InitTask()),
+      
       child: PlatformApp(
         localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
           DefaultWidgetsLocalizations.delegate,

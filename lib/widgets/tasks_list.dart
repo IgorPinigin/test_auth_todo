@@ -41,7 +41,7 @@ class _TasksListState extends State<TasksList> {
                 },
               ),
               onLongPress: () {
-                context.read<TasksBloc>().add(DeleteTask(task: task));
+                context.read<TasksBloc>().add(DeleteTask(task: task, isDeleted: true));
                 // print(context.read<TasksBloc>().state.allTasks);
               },
             );
