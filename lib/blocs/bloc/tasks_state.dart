@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 //import 'dart:convert';
 
 part of 'tasks_bloc.dart';
@@ -10,7 +9,7 @@ class TasksState extends Equatable {
   const TasksState({
     this.allTasks = const <Task>[],
     } 
-  );
+  ); 
   
 
   @override
@@ -27,6 +26,7 @@ class TasksState extends Equatable {
       allTasks: List<Task>.from((map['allTasks'] as List<int>).map<Task>((x) => Task.fromMap(x as Map<String,dynamic>),),),
     );
   }
+
 
 
 
