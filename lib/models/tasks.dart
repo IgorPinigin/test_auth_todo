@@ -31,6 +31,14 @@ class Task extends Equatable {
     );
   } 
 
+  
+  @override
+  List<Object?> get props => [
+        title,
+        isDone,
+        isDeleted,
+      ];
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'title': title,
@@ -47,14 +55,4 @@ class Task extends Equatable {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory Task.fromJson(String source) => Task.fromMap(json.decode(source) as Map<String, dynamic>);
-  
-  @override
-  List<Object?> get props => [
-        title,
-        isDone,
-        isDeleted,
-      ];
 }

@@ -15,19 +15,21 @@ void main() async {
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
 
-  final storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+  //final storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+  
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
   );
+  //print(HydratedBloc.storage.toString());
   {
     runApp(const MyApp());
   }
+
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -35,18 +37,18 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
     return BlocProvider(
-      create: (context) => TasksBloc()..add(InitTask()),
+      create: (_) => TasksBloc(),
       
-      child: PlatformApp(
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-          DefaultWidgetsLocalizations.delegate,
-          DefaultMaterialLocalizations.delegate,
-        ],
-        debugShowCheckedModeBanner: false,
-        title: 'Task Tracker',
-        material: (context, platform) => MaterialAppData(),
-        cupertino: (context, platform) => CupertinoAppData(),
-        home: const TasksScreen(),
+      child: MaterialApp(
+        // localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        //   DefaultWidgetsLocalizations.delegate,
+        //   DefaultMaterialLocalizations.delegate,
+        // ],
+        // debugShowCheckedModeBanner: false,
+        // title: 'Task Tracker',
+        // material: (context, platform) => MaterialAppData(),
+        // cupertino: (context, platform) => CupertinoAppData(),
+        home: TasksScreen(),
         //routes: {
         //'/page2': (context) => const Page2(),},
       ),

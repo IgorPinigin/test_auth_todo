@@ -30,19 +30,11 @@ class _TasksListState extends State<TasksList> {
                 activeColor: Colors.black,
                 value: task.isDone,
                 onChanged: (value) {
-                  // print(value);
-                  setState(() {
-                    task.isDone = value;
-                    context
-                        .read<TasksBloc>()
-                        .add(UpdateTask(task: task, isDone: value!));
-                    // print(context.read<TasksBloc>().state.props);
-                  });
+                  context.read<TasksBloc>().add(UpdateTask(task: task));
                 },
               ),
               onLongPress: () {
-                context.read<TasksBloc>().add(DeleteTask(task: task, isDeleted: true));
-                // print(context.read<TasksBloc>().state.allTasks);
+                context.read<TasksBloc>().add(DeleteTask(task: task));
               },
             );
           }),

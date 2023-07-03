@@ -4,17 +4,10 @@ import '../blocs/bloc_export.dart';
 import '../constants/colors.dart';
 import '../models/tasks.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({
-    super.key,
-  });
-
-  @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
+class AddTaskScreen extends StatelessWidget {
   TextEditingController titleController = TextEditingController();
+
+  AddTaskScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,14 +34,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   borderSide: BorderSide.none,
                 )),
             controller: titleController,
-            // onChanged: (value) {
-            //   print(value);
+            // onSaved: (newValue) {
+            //   setState(() {
+            //     titleController.text = newValue!;
+            //   });
             // },
-            onSaved: (newValue) {
-              setState(() {
-                titleController.text = newValue!;
-              });
-            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -63,6 +53,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     title: titleController.text,
                   );
                   context.read<TasksBloc>().add(AddTask(task: task));
+                  print(task);
                   Navigator.pop(context);
                 },
                 child: const Text('Add'),

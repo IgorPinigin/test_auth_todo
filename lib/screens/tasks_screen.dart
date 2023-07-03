@@ -4,17 +4,20 @@ import '../models/tasks.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({
     super.key,
   });
 
-  
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
 
+class _TasksScreenState extends State<TasksScreen> {
   void _addTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => const SingleChildScrollView(
+      builder: (context) => SingleChildScrollView(
         child: AddTaskScreen(),
       ),
     );
