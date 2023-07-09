@@ -1,73 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:test_1/widgets/next_button.dart';
+import '../constants/colors.dart';
 import '../constants/decorations.dart';
+import '../widgets/phone_image.dart';
 import '../widgets/text_form_field.dart';
 
-class ContainerForm extends StatelessWidget {
-  const ContainerForm({
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({
     super.key,
-    required this.sWidth,
-    required this.sHeight,
   });
-
-  final double sWidth;
-  final double sHeight;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: circles,
-      width: sWidth,
-      height: sHeight * 0.8,
-      child: FractionallySizedBox(
-        widthFactor: .8,
-        child: Form(
-            child: Column(children: [
-          Expanded(
-            flex: 1,
+    final sHeight = MediaQuery.of(context).size.height;
+    final sWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: background,
+      body: Container(
+        decoration: circles,
+        width: sWidth,
+        height: sHeight,
+        child: FractionallySizedBox(
+          widthFactor: .8,
+          child: Form(
             child: Column(
-              children: const [
-                Spacer(
-                  flex: 100,
+              children: [
+                const Spacer(
+                  flex: 70,
                 ),
-                Text(
-                  "Welcome Onboard !",
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                const Expanded(
+                  flex: 10,
+                  child: Text(
+                    "Welcome Back!",
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Spacer(
+                const Spacer(
                   flex: 10,
                 ),
-                Text(
-                  "Let's help you meet up your tasks",
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 18,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w100),
+                const Expanded(
+                    flex: 80,
+                    child: PhoneImage(path: "assets/images/listViewImage.png")),
+                const Spacer(
+                  flex: 15,
                 ),
-                Spacer(
-                  flex: 30,
+                const TextFormFieldAuth(insertHintText: "Enter your email"),
+                const Spacer(
+                  flex: 9,
                 ),
-                TextFormFieldAuth(insertHintText: "Enter your full name"),
-                Spacer(
+                const TextFormFieldAuth(insertHintText: "Enter your password"),
+                const Spacer(
+                  flex: 5,
+                ),
+                const Expanded(
+                  flex: 10,
+                  child: Text("Forget Password?",
+                      style: TextStyle(
+                          color: activeTextColor,
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w100)),
+                ),
+                const Spacer(
+                  flex: 20,
+                ),
+                Expanded(
+                  flex: 25,
+                  child: NextButton(
+                    sWidth: sWidth,
+                    sHeight: sHeight,
+                    title: 'Log In',
+                    onTapHandler: () => Navigator.pushNamed(context, '/tasks'),
+                  ),
+                ),
+                const Spacer(
                   flex: 10,
                 ),
-                TextFormFieldAuth(insertHintText: "Enter email"),
-                Spacer(
-                  flex: 10,
+                Expanded(
+                  flex: 20,
+                  child: RichText(
+                      text: TextSpan(children: [
+                    const TextSpan(
+                      text: 'Don`t have an account ?',
+                      style: TextStyle(color: Colors.black87, fontSize: 18),
+                    ),
+                    WidgetSpan(
+                        child: GestureDetector(
+                      child: const Text(
+                        ' sign up',
+                        style: TextStyle(color: activeTextColor, fontSize: 18),
+                      ),
+                      onTap: () => Navigator.pushNamed(context, '/auth'),
+                    ))
+                  ])),
                 ),
-                TextFormFieldAuth(insertHintText: "Enter password"),
-                Spacer(
-                  flex: 10,
-                ),
-                TextFormFieldAuth(insertHintText: "Confirm password"),
+                
               ],
             ),
           ),
-        ])),
+        ),
       ),
     );
   }

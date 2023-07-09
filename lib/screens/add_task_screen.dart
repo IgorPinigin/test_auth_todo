@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:test_1/services/guid_gen.dart';
 
 import '../blocs/bloc_export.dart';
 import '../constants/colors.dart';
 import '../models/tasks.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  TextEditingController titleController = TextEditingController();
+class AddTaskScreen extends StatefulWidget {
 
   AddTaskScreen({super.key});
+
+  @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  TextEditingController titleController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +33,7 @@ class AddTaskScreen extends StatelessWidget {
           TextFormField(
             // autofocus: true,
             textInputAction: TextInputAction.done,
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
                 fillColor: background,
                 filled: true,
@@ -34,23 +42,33 @@ class AddTaskScreen extends StatelessWidget {
                   borderSide: BorderSide.none,
                 )),
             controller: titleController,
-            // onSaved: (newValue) {
-            //   setState(() {
-            //     titleController.text = newValue!;
-            //   });
-            // },
+            onSaved: (newValue) {
+              setState(() {
+                titleController.text = newValue!;
+              });
+            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: buttonColor
+                ),
                 onPressed: () => Navigator.pop(context),
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: buttonColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
                 onPressed: () {
                   var task = Task(
                     title: titleController.text,
+                    id: GUIDGen.generate(),
                   );
                   context.read<TasksBloc>().add(AddTask(task: task));
                   print(task);

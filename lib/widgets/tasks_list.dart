@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_1/blocs/bloc_export.dart';
+import 'package:test_1/constants/colors.dart';
 
 import '../models/tasks.dart';
+import 'task_tile.dart';
 
 class TasksList extends StatefulWidget {
   const TasksList({
@@ -23,21 +25,9 @@ class _TasksListState extends State<TasksList> {
           itemCount: widget.tasksList.length,
           itemBuilder: (context, index) {
             var task = widget.tasksList[index];
-            return ListTile(
-              title: Text(task.title),
-              trailing: Checkbox(
-                checkColor: Colors.white,
-                activeColor: Colors.black,
-                value: task.isDone,
-                onChanged: (value) {
-                  context.read<TasksBloc>().add(UpdateTask(task: task));
-                },
-              ),
-              onLongPress: () {
-                context.read<TasksBloc>().add(DeleteTask(task: task));
-              },
-            );
+            return TaskTile(task: task);
           }),
     );
   }
 }
+

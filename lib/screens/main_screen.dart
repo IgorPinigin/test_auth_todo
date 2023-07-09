@@ -3,6 +3,7 @@ import 'package:test_1/screens/start_screen.dart';
 import 'package:test_1/widgets/next_button.dart';
 import '../constants/colors.dart';
 import 'login_screen.dart';
+import 'auth_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +18,8 @@ class _MainScreenState extends State<MainScreen> {
   String bottomText = "";
 
   String titleButton = "Get Started";
-  TextStyle bottomTextStyle = const TextStyle(color: Colors.black, fontSize: 18);
+  TextStyle bottomTextStyle =
+      const TextStyle(color: Colors.black, fontSize: 18);
 
   @override
   void initState() {
@@ -31,8 +33,8 @@ class _MainScreenState extends State<MainScreen> {
     final sHeight = MediaQuery.of(context).size.height;
     final sWidth = MediaQuery.of(context).size.width;
     contentWidgets = [
-      ContainerStart(sWidth: sWidth, sHeight: sHeight),
-      ContainerForm(sWidth: sWidth, sHeight: sHeight),
+      //ContainerStart(sWidth: sWidth, sHeight: sHeight),
+      //ContainerForm(sWidth: sWidth, sHeight: sHeight),
       //ContainerAuth(sWidth: sWidth, sHeight: sHeight),
       //TasksScreen(),
     ];
@@ -53,18 +55,18 @@ class _MainScreenState extends State<MainScreen> {
                   if (index == 0) {
                     index = 1;
                     titleButton = "Register";
-                    bottomText = "Already have an account? sign in";
                   } else if (index == 1) {
-                    index = 2;
-                  //titleButton = "LOG IN";
+                    //Navigator.pushNamed(context, '/tasks');
+                    //titleButton = "LOG IN";
                     titleButton = "";
-                  //bottomText = "Don’t have an account? sign up";
+                    //bottomText = "Don’t have an account? sign up";
                     bottomText = "";
-                 }// else if (index == 2) {
-                  //   index = 0;
-                  //   titleButton = "Get Started";
-                  //   bottomText = "";
-                  //} else if (index == 3) {
+                  }  else if (index == 2) {
+                     index = 0;
+                     titleButton = "Get Started";
+                     bottomText = "";
+                  } 
+                  // else if (index == 3) {
                   //   index = 0;
                   //   //titleButton = "Get Started";
                   //   //bottomText = "";
@@ -75,21 +77,25 @@ class _MainScreenState extends State<MainScreen> {
             const Spacer(
               flex: 10,
             ),
-            Text(
-              bottomText,
-              style: bottomTextStyle,
-            ),
+            RichText(
+                text: TextSpan(children: [
+              const TextSpan(
+                  text: 'Already have an account?',
+                  style: TextStyle(color: Colors.black87)),
+              WidgetSpan(
+                  child: GestureDetector(
+                child: const Text(
+                  'sign in',
+                  style: TextStyle(color: activeTextColor),
+                ),
+                onTap: () => index = 2,
+              ))
+            ])),
             const Spacer(
               flex: 10,
             )
           ],
-        ));
+        )
+      );
   }
 }
-
-
-
-
-
-
-

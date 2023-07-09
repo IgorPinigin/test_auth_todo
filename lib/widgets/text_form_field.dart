@@ -10,7 +10,7 @@ class TextFormFieldAuth extends StatelessWidget {
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
           hintText: insertHintText,
-          hintStyle: const TextStyle(color: Colors.black54),
+          hintStyle: const TextStyle(color: Colors.black87),
           fillColor: Colors.white,
           filled: true,
           border: OutlineInputBorder(
